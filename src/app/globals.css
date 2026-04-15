@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+/* class-based dark mode */
+@custom-variant dark (&:is(.dark *));
+
+/* next/font sets --font-sans on <html>; --default-font-family wires it into preflight */
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --default-font-family: var(--font-sans);
+}
+
+/* design tokens — each emits a CSS var + Tailwind utility class */
+@theme {
+  /* brand */
+  --color-brand: #007bff;
+  --color-brand-dark: #011831;
+
+  /* gray */
+  --color-gray-600: #98a2b3;
+  --color-gray-700: #344054;
+
+  /* semantic */
+  --color-warning-base: #f79e1b;
+
+  /* type scale (steps that differ from Tailwind defaults) */
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.875rem;
+  --text-xl: 1.5rem;
+  --text-xl--line-height: 2rem;
+  --text-2xl: 2.25rem;
+  --text-2xl--line-height: 2.75rem;
+
+  /* layout spacing */
+  --spacing-input-h: 3.375rem; /* 54px  — input height             */
+  --spacing-nav-h: 6.0625rem; /* 97px  — topbar height            */
+  --spacing-sidebar-w: 16.5625rem; /* 265px — sidebar width (expanded) */
+  --spacing-sidebar-collapsed-w: 5rem; /* 80px  — sidebar width (collapsed)*/
+
+  /* radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-full: 624.9375rem;
+
+  /* shadows */
+  --shadow-xs: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
+
+/*
+  Second arg = same default as :root — only for editor/Tailwind IntelliSense color
+  swatches on utilities like text-muted-foreground. Runtime still uses :root / .dark.
+*/
+@theme inline {
+  --color-background: var(--background, #ffffff);
+  --color-foreground: var(--foreground, #1d2939);
+  --color-card: var(--card, #ffffff);
+  --color-card-foreground: var(--card-foreground, #1d2939);
+  --color-popover: var(--popover, #ffffff);
+  --color-popover-foreground: var(--popover-foreground, #1d2939);
+  --color-primary: var(--primary, #007bff);
+  --color-primary-foreground: var(--primary-foreground, #ffffff);
+  --color-secondary: var(--secondary, #dfe5f3);
+  --color-secondary-foreground: var(--secondary-foreground, #007bff);
+  --color-tertiary: var(--tertiary, #e8eefe);
+  --color-tertiary-foreground: var(--tertiary-foreground, #007bff);
+  --color-muted: var(--muted, #f3f3f3);
+  --color-muted-foreground: var(--muted-foreground, #909bac);
+  --color-accent: var(--accent, #f7f8fb);
+  --color-accent-foreground: var(--accent-foreground, #1d2939);
+  --color-destructive: var(--destructive, #eb001b);
+  --color-destructive-foreground: var(--destructive-foreground, #ffffff);
+  --color-border: var(--border, #dce2ec);
+  --color-input: var(--input, #f7f8fb);
+  --color-ring: var(--ring, #007bff);
+  --color-sidebar: var(--sidebar, #ffffff);
+  --color-sidebar-foreground: var(--sidebar-foreground, #909bac);
+  --color-sidebar-primary: var(--sidebar-primary, #007bff);
+  --color-sidebar-primary-foreground: var(
+    --sidebar-primary-foreground,
+    #ffffff
+  );
+  --color-sidebar-accent: var(--sidebar-accent, #dfe5f3);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground, #007bff);
+  --color-sidebar-border: var(--sidebar-border, #dce2ec);
+  --color-sidebar-ring: var(--sidebar-ring, #007bff);
+  --color-nav-item-active: var(--nav-item-active, #e8eefe);
+
+  --radius: var(--radius-md, 0.625rem);
+}
+
+/* light mode tokens */
+:root {
+  --background: #ffffff;
+  --foreground: #1d2939;
+  --card: #ffffff;
+  --card-foreground: #1d2939;
+  --popover: #ffffff;
+  --popover-foreground: #1d2939;
+  --primary: #007bff;
+  --primary-foreground: #ffffff;
+  --secondary: #dfe5f3;
+  --secondary-foreground: #007bff;
+  --tertiary: #e8eefe;
+  --muted: #f3f3f3;
+  --muted-foreground: #909bac;
+  --accent: #f7f8fb;
+  --accent-foreground: #1d2939;
+  --destructive: #eb001b;
+  --destructive-foreground: #ffffff;
+  --border: #dce2ec;
+  --input: #f7f8fb;
+  --ring: #007bff;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #909bac;
+  --sidebar-primary: #007bff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #dfe5f3;
+  --sidebar-accent-foreground: #007bff;
+  --sidebar-border: #dce2ec;
+  --sidebar-ring: #007bff;
+  --nav-item-active: #e8eefe;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: var(--radius-full);
+}
+
+/* utility to hide scrollbars (e.g. horizontally-scrolling tab/nav rows) */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* cards carousel — only show active + immediate neighbors, with smooth fades */
+.card-carousel .swiper-slide {
+  transition: opacity 0.6s ease;
+  opacity: 1;
+}
+.card-carousel .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-prev):not(.swiper-slide-next) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* card gradient utilities */
+.gradient-brand-purple-blue {
+  background: linear-gradient(94.57deg, #812fff 2.45%, #304fff 96.19%);
+}
+
+.gradient-brand-blue {
+  background: linear-gradient(
+    94.57deg,
+    var(--color-brand) 2.45%,
+    #304fff 98.1%
+  );
+}
