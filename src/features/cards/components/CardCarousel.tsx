@@ -20,8 +20,8 @@ const MAP_BG_SRC = "/images/map.svg";
 
 /** Tailwind v4: `bg-linear-to-*` + stop utilities (see tailwindcss.com/docs/gradient-color-stops). */
 const CARD_GRADIENT_CLASSES: Record<CardGradientVariant, string> = {
-  "purple-blue": "bg-linear-to-br from-[#6B3FD8] to-[#4535C8]",
-  blue: "bg-linear-to-br from-[#1A60F5] to-[#0047D6]",
+  "purple-blue": "bg-linear-[92.74deg,#812FFF_2.45%,#304FFF_96.19%]",
+  blue: "bg-linear-[92.74deg,#007BFF_2.45%,#304FFF_98.1%]",
   dark: "bg-linear-to-br from-[#011831] to-[#0a3060]",
 };
 
