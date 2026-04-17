@@ -203,10 +203,12 @@ Authenticated-feel pages (`/settings`, `/cards/*`) are explicitly marked `robots
 
 ## Performance
 
-- **Large decorative SVG served as a static asset**: `public/images/map.svg` is painted as `background-image` on the credit-card face so the JS bundle stays lean.
-- **`next/font`** — `DM Sans` self-hosted with `swap`, zero CLS, no render-blocking network request.
+- **Large decorative SVG served as a static asset**: `public/images/map.svg` is painted as `background-image` on the credit-card face so the JS bundle stays lean (avoids SVGR/Babel pulling a huge SVG into the client graph).
+- **`next/font`** — `DM Sans` self-hosted via `next/font/google`, `variable` on `<html>`, no render-blocking stylesheet request.
 - **Route-based code splitting** — every page is its own RSC bundle; `"use client"` scoped as narrowly as possible (feature shells + forms only).
 - **No runtime CSS-in-JS** — Tailwind v4 + tokens compile to static CSS.
+- **Dashboard + Swiper**: main column uses `min-w-0` / horizontal clip so `slidesPerView="auto"` does not inflate flex intrinsic width or shift the sidebar layout on large screens.
+- **Vitest**: `server.deps.inline` for `swiper` and `recharts` only in tests—keeps production bundling unchanged while stabilizing jsdom runs.
 
 ## Design trade-offs
 
